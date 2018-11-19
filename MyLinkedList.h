@@ -1,24 +1,25 @@
+#include "MusicClipPtr.h"
+#include <iostream>
 using namespace std;
-template<typename T>
+//template<typename T>
 class MyLinkedList {
 private:
 	class Node {
-	private:
-		T data;
-		Node* next;
 	public:
+		MusicClipPtr* data;
+		Node* next;
 		//Constructor
-		Node(T d) {
+		Node(MusicClipPtr* d) {
 			data = d;
 			next = nullptr;
 		}
 		~Node() {
 			delete next;
 		}
-		T getData() {
+		MusicClipPtr* getData() {
 			return data;
 		}
-		void setData(T d) {
+		void setData(MusicClipPtr* d) {
 			data = d;
 		}
 		Node* getNext() {
@@ -28,8 +29,11 @@ private:
 			next = n;
 		}
         void print(){
-           cout << data.toString(); 
+           cout << data->toString(); 
         }
+		string toString(){
+			return data->toString();
+		}
 	};
 	int count;
 	Node* root;
@@ -54,7 +58,7 @@ public:
 	}
 
 	//Add an element to the list
-	void add(T d) {
+	void add(MusicClipPtr* d) {
 		Node* element = new Node(d);
 		element->setNext(root);
 		root = element;
@@ -62,8 +66,8 @@ public:
 	}
 
 	//Remove and return the data in the first element in the list
-	T pop() {
-		T d = nullptr;
+	MusicClipPtr* pop() {
+		MusicClipPtr* d;
 		if (root) {
 			d = root->getData();
 			root = root->getNext();
@@ -83,7 +87,7 @@ public:
 	void print() {
 		Node* cur = root;
 		while (cur) {
-			cout << cur->print() << " ";
+			cout << cur->toString() << endl;
 			cur = cur->getNext();
 		}
 	}
